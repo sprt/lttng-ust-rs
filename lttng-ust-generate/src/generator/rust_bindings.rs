@@ -98,7 +98,7 @@ fn rust_type_for(ty: &CTFType) -> String {
 
 fn c_arg_for_field(base_name: String, field: &Field) -> String {
     if let CTFType::SequenceText = field.ctf_type {
-        format!("::std::mem::transmute({0}.as_bytes().as_ptr()), {0}.len()", base_name)
+        format!("::std::mem::transmute({0}.as_bytes().as_ptr()), {0}.len() as u64", base_name)
     } else if field.ctf_type.is_sequence() {
         base_name.clone() + ", " + &base_name + ".len()"
     } else {
